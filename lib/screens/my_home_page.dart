@@ -29,6 +29,7 @@ class _MyHomePageState extends State<MyHomePage> {
     getCrypto();
   }
 
+  //fetch list
   getCrypto() async {
     var provider = Provider.of<CryptoProvider>(context, listen: false);
     await provider.getCrypto();
@@ -121,7 +122,8 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  image(String id) async {
+  //fetch image of coin
+  fetchImage(String id) async {
     var response = await http.get(
         Uri.parse(
             "https://pro-api.coinmarketcap.com/v2/cryptocurrency/info?id=$id"),
@@ -131,17 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return json.decode(response.body)['data'][id]['logo'].toString();
   }
 
-  conversion(String to, String from, String amount) async {
-    var response = await http.get(
-        Uri.parse(
-            "https://api.apilayer.com/currency_data/convert?to=$to&from=$from&amount=$amount"),
-        headers: {
-          'apikey': AppConstants.currencyKey,
-        });
-
-    return json.decode(response.body)['result'].toString();
-  }
-
+  //filter list for the required coin [Bitcoin][Ethereum][XRP][Dogecoin][Dash][Litecoin]
   filterList(List<Data> allList, List<Data> filteredList) {
     for (var i = 0; i < allList.length; i++) {
       if (allList[i].name == "Bitcoin" ||
@@ -187,7 +179,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     FutureBuilder(
-                        future: image(b[index].id.toString()),
+                        future: fetchImage(b[index].id.toString()),
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             return CircleAvatar(
@@ -334,7 +326,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: FutureBuilder(
-                  future: image(b[index].id.toString()),
+                  future: fetchImage(b[index].id.toString()),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return CircleAvatar(

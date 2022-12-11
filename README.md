@@ -11,7 +11,7 @@ A crypto list/converter built with flutter.
 - A little knowledge of Dart and Flutter
 - Some fingers to code 😂
 
-Download the `crypto.apk` to try out wa_status_saver
+Download the `crypto.apk` to try out crypto
 <br>
 <a href="https://bit.ly/myapklink_crypto"><img src="https://playerzon.com/asset/download.png" width="200"></img></a>
 <br>
